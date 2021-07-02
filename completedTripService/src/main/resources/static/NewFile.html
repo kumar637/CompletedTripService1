@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>action button</title>
+
+</head>
+<body>
+<label> TripCabId </label> <input type ="text"id="tripcabId"/> 
+<input type="button" value ="Action"  id ="actionBtn"/>
+<script type="text/javascript" >
+ var Actionstr = document.getElementById("actionBtn");
+ Actionstr.onclick = navigate;
+ function navigate(){
+	 const id = document.getElementById("tripcabId").value;
+	 window.location.href = "cab-app-completedtrip.html?TripId =" + id;
+}
+	
+
+	</script>
+
+
+
+</body>
+</html>
