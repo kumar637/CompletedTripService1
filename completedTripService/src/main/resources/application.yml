@@ -11,15 +11,17 @@ spring:
       
       
   mail:
-    host: smtp.gmail.com
-    password: wayizsozmbxhqjpv
+    host: smtp.office365.com
+    password: Mangalam@123
     port: 587
     properties:
       mail:
         smtp:
+         
           auth: true
           starttls:
             enable: true
+          
     protocol: smtp
-    username: jebakumar928@gmail.com
+    username: kumar.v@avasoft.com
       

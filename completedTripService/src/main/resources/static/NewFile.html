@@ -7,13 +7,15 @@
 </head>
 <body>
 <label> TripCabId </label> <input type ="text"id="tripcabId"/> 
+<label>BookingId </label> <input type ="text" id = "bookingId"/>
 <input type="button" value ="Action"  id ="actionBtn"/>
 <script type="text/javascript" >
  var Actionstr = document.getElementById("actionBtn");
  Actionstr.onclick = navigate;
  function navigate(){
 	 const id = document.getElementById("tripcabId").value;
-	 window.location.href = "cab-app-completedtrip.html?TripId =" + id;
+	 const bookId = document.getElementById("bookingId").value;
+	 window.location.href = "cab-app-completedtrip.html?TripId =" + id + "?bookId =" + bookId;
 }
 	
 

@@ -2,11 +2,13 @@
 	
 	 var querystr = window.location.search;
 	// alert(querystr);
-	 var id = querystr.split("=")[1];
+	 var id = querystr.split("=");
+	 var tripId = id[1];
+	 var bookId = id[2];
 	window.onload = getCompletedTrip;
 	var xhr = new XMLHttpRequest();
 	function getCompletedTrip() {
-		xhr.open("GET", "http://localhost:4040/api/v1/completedTrip/" + id,
+		xhr.open("GET", "http://localhost:4040/api/v1/completedTrip/" + tripId,
 			true);
 		xhr.onreadystatechange = processResponse;
 		xhr.send(null);
@@ -52,7 +54,31 @@
 				}
 			}
 			
-			document.getElementById('reachedTime').innerText = completedTrip.reachedTime;
+		var reachedTime = 	document.getElementById('reachedTime');
+			var slot1 = completedTrip.reachedTime;
+			var slotSplitted1 = slot1.split(":");
+			slotHour = slotSplitted1[0];
+			if(slotHour < 12){
+				if(slotHour == 00 ){
+					reachedTime.innerHTML ="12" + ":" + slotSplitted1[1] +  " AM";
+				}else{
+					reachedTime.innerHTML =slotHour + ":" + slotSplitted1[1] +  " AM";
+				}
+				
+			}else{
+				slotHour = slotHour - 12 ;
+				if(slotHour < 10){
+					reachedTime.innerHTML = "0" + slotHour + ":" + slotSplitted1[1] + " PM";
+					
+				}if(slotHour == 0 ){
+					reachedTime.innerHTML = "12"+ ":" + slotSplitted1[1] + " PM";
+				}
+				else{
+					reachedTime.innerHTML =   slotHour + ":" + slotSplitted1[1] +" PM";
+				}
+			}
+			
+			
 			var length = completedTrip.tripList.length;
 			var tbody = document.getElementById("tableBody");
 			for (i = 0; i < length; i++) {
@@ -85,13 +111,39 @@
 		}
 	}
 
-	// When Raise A Complaint button clicks
+	
+	//////////////////// When User Clicks the Raise a Complaint////////////////////
+	
 	var raiseBtn = document.getElementById("raiseBtn");
 	raiseBtn.addEventListener("click", popUpDetails)
 		// popUp details
 	function popUpDetails() {
 		document.getElementById("PopupDate").innerHTML = "Date: " + dateFormat;
-		document.getElementById("PopupTimeslot").innerHTML = "Time Slot: " + completedTrip.timeSlot;
+		 var timeSlotPop= document.getElementById("PopupTimeslot");
+		 var time =completedTrip.timeSlot;
+		 var slotSplitted2 = time.split(":");
+			slotHour = slotSplitted2[0];
+			if(slotHour < 12){
+				if(slotHour == 00 ){
+					timeSlotPop.innerHTML =  "Time Slot:  " +"12" + ":" + slotSplitted2[1] +  " AM";
+				}else{
+					timeSlotPop.innerHTML = "Time Slot:  " +slotHour + ":" + slotSplitted2[1] +  " AM";
+				}
+				
+			}else{
+				slotHour = slotHour - 12 ;
+				if(slotHour < 10){
+					timeSlotPop.innerHTML = "Time Slot:  " + "0" + slotHour + ":" + slotSplitted2[1] + " PM";
+					
+				}if(slotHour == 0 ){
+					timeSlotPop.innerHTML = "Time Slot:  " + "12"+ ":" + slotSplitted2[1] + " PM";
+				}
+				else{
+					reachedTime.innerHTML = "Time Slot:  " +  slotHour + ":" + slotSplitted2[1] +" PM";
+				}
+			}
+			
+		
 		document.getElementById("PopupCabNo.").innerHTML = "Cab Number: " + completedTrip.cabNumber;
 		document.getElementById("PopDriverName").innerHTML = "Driver Name: " + completedTrip.driverName;
 		document.getElementById("PopupDriverNo").innerHTML = "Driver Number: " + completedTrip.driverNumber;
@@ -114,7 +166,7 @@
 			var complaintsList = JSON.parse(this.responseText);
 			var reasonSel = document.getElementById("dropdown");
 			var len = complaintsList.length;
-
+			// for avoid the repeatness in the dropdown
 			var optLength = reasonSel.options.length;
 			for (i = optLength - 1; i > 0; i--) {
 					reasonSel.options[i] = null;
@@ -130,10 +182,12 @@
 
 	}
 
-		// Post the Complaint in the DB
+///////////// Post Or Update the Complaint in The Database////////////////////
+		
 	var xhrComplaints = new XMLHttpRequest();
 	//var xhy = new XMLHttpRequest();
 	var popup = document.getElementById("raiseComPopUp");
+	//var bookingId = completedTrip.tripList.bookingId;
 	popup.onclick = validateComplaints;
 	function validateComplaints() {
 		var reasonSelec = document.getElementById("dropdown");
@@ -150,7 +204,7 @@
 
 		var reasonSelec = document.getElementById("dropdown");
 		var value = reasonSelec.options[reasonSelec.selectedIndex].value;
-		xhrComplaints.open("PUT", "http://localhost:4040/api/v1/updateComplaints/" + 123 + "/" + value, true);
+		xhrComplaints.open("PUT", "http://localhost:4040/api/v1/updateComplaints/" + bookId + "/" + value, true);
 		xhrComplaints.onreadystatechange = updateComplaint;
 		
 		

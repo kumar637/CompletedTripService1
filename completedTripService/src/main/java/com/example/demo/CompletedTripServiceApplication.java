@@ -49,14 +49,14 @@ public class CompletedTripServiceApplication {
 						LocalTime.now(), 6, LocalTime.of(9, 0), LocalTime.of(10, 0), "Reached", null);
 				BookingRequest user2 = new BookingRequest(123, 2096, "jithu", "Alpha City", "velachery", "kelambakam",
 						LocalTime.now(), 6, LocalTime.of(10, 0), LocalTime.of(11, 0), "Reached", null);
-				BookingRequest user3 = new BookingRequest(125, 2094, "Ravi", "Alpha City", "Guindy", "Guindy",
-						LocalTime.now(), 6, LocalTime.of(10, 0), LocalTime.of(11, 0), "Reached", "None");
+				BookingRequest user4 = new BookingRequest(256, 2094, "Ravi", "Alpha City", "Guindy", "Guindy",
+						LocalTime.now(), 8, LocalTime.of(10, 0), LocalTime.of(12, 0), "Ongoing", null);
 			//	repo.save(user1);
-				repo.save(user2);
-			//	repo.save(user3);
-	//			TripCabInfo trip1 = new TripCabInfo(6, "TN10Ay8434", 1, "Alpha City", "Tambaram", "AGS",
-	//					LocalDate.now(), LocalTime.now(), 7, 0, 7, "Reached", LocalTime.of(9, 0), LocalTime.of(10, 30));
-	//			cabRepo.save(trip1);
+				//repo.save(user2);
+			//	repo.save(user4);
+		//TripCabInfo trip2= new TripCabInfo(7, "TN10Ay8764", 1, "Alpha City", "Giundy", "AGS",
+			//		LocalDate.now(), LocalTime.now(), 7, 0, 7, "Reached", LocalTime.of(9, 0), LocalTime.of(10, 30));
+			//cabRepo.save(trip2);
 //				DriverInfo ramesh = new DriverInfo(1, "Ramesh", 987675675, "kuma@ere", "TNxxxxxxx", LocalDate.now());
 //				driverRepo.save(ramesh);
 //

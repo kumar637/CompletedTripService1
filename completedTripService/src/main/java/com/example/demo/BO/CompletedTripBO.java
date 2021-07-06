@@ -19,7 +19,7 @@ import lombok.experimental.FieldDefaults;
 @Component
 public class CompletedTripBO {
 
-	List<TripSheetBO> tripList; // list<kjbkbjy> bbj;
+	List<TripSheetBO> tripList; 
 	String CabNumber;// date 
 	String source;
 	String destination;
@@ -28,4 +28,5 @@ public class CompletedTripBO {
 	String driverName;
 	long driverNumber;
 	LocalDate dateOfTravel;
+	
 }

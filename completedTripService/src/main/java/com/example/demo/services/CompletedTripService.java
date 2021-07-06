@@ -63,11 +63,12 @@ public class CompletedTripService {
 		cmptBo.setDriverNumber(info.getDriverNumber());
 		cmptBo.setSource(CompletedTrip.getSource());
 		cmptBo.setCabNumber(CompletedTrip.getCabNumber());
+		
 
 		// for each employee
 		for (BookingRequest eachRequest : BookingDetails) {
-			tpList.add(new TripSheetBO(eachRequest.getEmployeeId(), eachRequest.getEmlpoyeeName(),
-					eachRequest.getDropPoint()));
+			tpList.add(new TripSheetBO(eachRequest.getEmployeeId(),
+	 eachRequest.getEmlpoyeeName(), eachRequest.getDropPoint()));
 		}
 
 		cmptBo.setTripList(tpList);
@@ -80,7 +81,7 @@ public class CompletedTripService {
 
 	public List<BookingRequest> getBookingRequest(long tripCabId) {
 		List<BookingRequest> BookingDetails = this.repo.findByTripCabId(tripCabId);// get the bookingRequestBO Using
-
+		
 		return BookingDetails;
 	}
 
@@ -98,8 +99,8 @@ public class CompletedTripService {
 	}
 	public SimpleMailMessage sendEmail() {
 		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setFrom("jebakumar298@gmail.com");
-		mail.setTo("gokul.r1598@gmail.com");
+		mail.setFrom("kumar.v@avasoft.com");
+		mail.setTo("kumar.v@avasoft.com");
 		mail.setSubject("User");
 		mail.setText("Hi there ");
 		
