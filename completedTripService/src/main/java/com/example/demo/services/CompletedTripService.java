@@ -99,8 +99,9 @@ public class CompletedTripService {
 	}
 	public SimpleMailMessage sendEmail() {
 		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setFrom("kumar.v@avasoft.com");
-		mail.setTo("kumar.v@avasoft.com");
+		mail.setFrom("kumarjeba928@outlook.com");
+		mail.setTo("kumarstunner@outlook.com");
+		//mail.setTo("rohit.krish@hotmail.com");
 		mail.setSubject("User");
 		mail.setText("Hi there ");
 		

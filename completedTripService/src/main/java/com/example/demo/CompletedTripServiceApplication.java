@@ -52,7 +52,7 @@ public class CompletedTripServiceApplication {
 				BookingRequest user4 = new BookingRequest(256, 2094, "Ravi", "Alpha City", "Guindy", "Guindy",
 						LocalTime.now(), 8, LocalTime.of(10, 0), LocalTime.of(12, 0), "Ongoing", null);
 			//	repo.save(user1);
-				//repo.save(user2);
+				repo.save(user2);
 			//	repo.save(user4);
 		//TripCabInfo trip2= new TripCabInfo(7, "TN10Ay8764", 1, "Alpha City", "Giundy", "AGS",
 			//		LocalDate.now(), LocalTime.now(), 7, 0, 7, "Reached", LocalTime.of(9, 0), LocalTime.of(10, 30));

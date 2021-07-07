@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 public class CompletedTripBO {
 
 	List<TripSheetBO> tripList; 
-	String CabNumber;// date 
+	String CabNumber;
 	String source;
 	String destination;
 	LocalTime timeSlot;
