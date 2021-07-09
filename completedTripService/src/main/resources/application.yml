@@ -11,19 +11,17 @@ spring:
       
       
   mail:
-    host: smtp.office365.com
-    password: Kumar28031999
-    port: 587
+    host: smtp.outlook.com
+    password: Mangalam@123
+    port: 25
     properties:
       mail:
         smtp:
-          connecttimeout: 5000
-          timeout: 3000
-          writetimeout: 5000  
+          
           auth: true
           starttls:
             enable: true
         store:  
           protocol: smtp
-    username: kumarjeba928@outlook.com
+    username: kumar.v@avasoft.com
       
