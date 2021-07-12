@@ -47,6 +47,7 @@ public class CompletedTripService {
 
 			// get the details of bookingRequestBO through tripCabId
 		List<BookingRequest> BookingDetails = this.repo.findByTripCabId(tripCabId);
+		
 		long driverID = CompletedTrip.getDriverID();
 
 			// get the driver details through driverId
@@ -67,12 +68,11 @@ public class CompletedTripService {
 			// for each employee
 		for (BookingRequest eachRequest : BookingDetails) {
 			tpList.add(new TripSheetBO(eachRequest.getEmployeeId(), eachRequest.getEmlpoyeeName(),
-					eachRequest.getDropPoint()));
+					eachRequest.getDropPoint(),eachRequest.getReachedTime()));
 		}
 
 		cmptBo.setTripList(tpList);
-		cmptBo.setReachedTime(LocalTime.now());
-		// change to actual time getting from the js
+		
 
 		return cmptBo;
 

@@ -24,7 +24,7 @@ public class CompletedTripBO {
 	String source;
 	String destination;
 	LocalTime timeSlot;
-	LocalTime reachedTime;
+	//LocalTime reachedTime;
 	String driverName;
 	long driverNumber;
 	LocalDate dateOfTravel;

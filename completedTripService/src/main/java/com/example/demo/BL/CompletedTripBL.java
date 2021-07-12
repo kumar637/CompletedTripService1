@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.BO.CompletedTripBO;
 import com.example.demo.entitys.BookingRequest;
 import com.example.demo.entitys.Complaints;
 import com.example.demo.services.CompletedTripService;
 
+@Component
 public class CompletedTripBL {
 
 	@Autowired

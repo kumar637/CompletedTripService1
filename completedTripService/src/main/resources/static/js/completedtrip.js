@@ -1,10 +1,11 @@
 // Completed Trip Js
 	
 	 var querystr = window.location.search;
-	// alert(querystr);
+	alert(querystr);
 	 var id = querystr.split("=");
-	 var tripId = id[1];
+	 var tripId = id[1];	
 	 var bookId = id[2];
+	 var emplID = id[3];
 	window.onload = getCompletedTrip;
 	var xhr = new XMLHttpRequest();
 	function getCompletedTrip() {
@@ -54,31 +55,9 @@
 				}
 			}
 			
-		var reachedTime = 	document.getElementById('reachedTime');
-			var slot1 = completedTrip.reachedTime;
-			var slotSplitted1 = slot1.split(":");
-			slotHour = slotSplitted1[0];
-			if(slotHour < 12){
-				if(slotHour == 00 ){
-					reachedTime.innerHTML ="12" + ":" + slotSplitted1[1] +  " AM";
-				}else{
-					reachedTime.innerHTML =slotHour + ":" + slotSplitted1[1] +  " AM";
-				}
-				
-			}else{
-				slotHour = slotHour - 12 ;
-				if(slotHour < 10){
-					reachedTime.innerHTML = "0" + slotHour + ":" + slotSplitted1[1] + " PM";
-					
-				}if(slotHour == 0 ){
-					reachedTime.innerHTML = "12"+ ":" + slotSplitted1[1] + " PM";
-				}
-				else{
-					reachedTime.innerHTML =   slotHour + ":" + slotSplitted1[1] +" PM";
-				}
-			}
 			
 			
+			var employeeReachedTime;
 			var length = completedTrip.tripList.length;
 			var tbody = document.getElementById("tableBody");
 			for (i = 0; i < length; i++) {
@@ -105,9 +84,38 @@
 				td3.innerHTML = completedTrip.tripList[i].dropPoint;
 				trow.appendChild(td3);
 				tbody.appendChild(trow);
+				
+				if(completedTrip.tripList[i].employeeId == emplID){
+					 employeeReachedTime = completedTrip.tripList[i].reachedTime;
+				}
 			}
-			//var len = length - 1;
+			// no.of employees
 			document.getElementById("passenger").innerText = "No.Of Passengers : "+ length;
+			// Reached Time of the Login Employee.
+			var reachedTime = document.getElementById('reachedTime');
+			var slot1 = employeeReachedTime;
+			var slotSplitted1 = slot1.split(":");
+			slotHour = slotSplitted1[0];
+			if(slotHour < 12){
+				if(slotHour == 00 ){
+					reachedTime.innerText ="12" + ":" + slotSplitted1[1] +  " AM";
+				}else{
+					reachedTime.innerText =slotHour + ":" + slotSplitted1[1] +  " AM";
+				}
+				
+			}else{
+				slotHour = slotHour - 12 ;
+				if(slotHour < 10){
+					reachedTime.innerText = "0" + slotHour + ":" + slotSplitted1[1] + " PM";
+					
+				}if(slotHour == 0 ){
+					reachedTime.innerText = "12"+ ":" + slotSplitted1[1] + " PM";
+				}
+				else{
+					reachedTime.innerText =   slotHour + ":" + slotSplitted1[1] +" PM";
+				}
+			}
+			
 		}
 	}
 
@@ -215,7 +223,7 @@
 				alert("Complaints registered Successfully!");
 
 			}
-			if (xhrComplaints.readyState == 4 && xhrComplaints.status == 400) {
+			if (xhrComplaints.readyState == 4 && xhrComplaints.status == 208) {
 				alert("Complaints Already registerd !");
 
 

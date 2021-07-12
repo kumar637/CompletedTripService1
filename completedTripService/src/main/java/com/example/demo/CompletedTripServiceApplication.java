@@ -45,15 +45,15 @@ public class CompletedTripServiceApplication {
 			@Override
 			public void run(String... args) throws Exception {
 
-				BookingRequest user1 = new BookingRequest(124, 2098, "kumar", "Alpha City", "Tamabaram", "AGS",
+				BookingRequest user8 = new BookingRequest(443, 4443, "parthiban", "Alpha City", "Tamabaram", "BTS",
 						LocalTime.now(), 6, LocalTime.of(9, 0), LocalTime.of(10, 0), "Reached", null);
-				BookingRequest user2 = new BookingRequest(123, 2096, "jithu", "Alpha City", "velachery", "kelambakam",
-						LocalTime.now(), 6, LocalTime.of(10, 0), LocalTime.of(11, 0), "Reached", null);
-				BookingRequest user4 = new BookingRequest(256, 2094, "Ravi", "Alpha City", "Guindy", "Guindy",
+				BookingRequest user9 = new BookingRequest(988, 2234, "Ranbeer", "Alpha City", "velachery", "naruto",
+						LocalTime.now(), 6, LocalTime.of(10, 0), LocalTime.now(), "Reached", null);
+				BookingRequest user10 = new BookingRequest(776, 6453, "harish", "Alpha City", "Guindy", "valasaravakkam",
 						LocalTime.now(), 8, LocalTime.of(10, 0), LocalTime.of(12, 0), "Ongoing", null);
-			//	repo.save(user1);
-				repo.save(user2);
-			//	repo.save(user4);
+				repo.save(user8);
+				repo.save(user9);
+				repo.save(user10);
 		//TripCabInfo trip2= new TripCabInfo(7, "TN10Ay8764", 1, "Alpha City", "Giundy", "AGS",
 			//		LocalDate.now(), LocalTime.now(), 7, 0, 7, "Reached", LocalTime.of(9, 0), LocalTime.of(10, 30));
 			//cabRepo.save(trip2);

@@ -53,15 +53,15 @@ public class CompletedTripController {
 
 		if (cmpDes == null) {
 			// send mail to User ---> Admin or HR
-			complBL.sendEmail();
+		//	complBL.sendEmail();
 
 			updateComplaints.setComplaintDescription(complaintDes);
 			updatedCompl = repo.save(updateComplaints);
 
 		} else {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);// need to be change
+			return new ResponseEntity<>(null, HttpStatus.ALREADY_REPORTED);// need to be change
 		}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(updatedComplaints);
+		return ResponseEntity.status(HttpStatus.CREATED).body(updatedCompl);
 	}
 }

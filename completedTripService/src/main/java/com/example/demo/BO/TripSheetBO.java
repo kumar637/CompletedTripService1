@@ -1,5 +1,7 @@
 package com.example.demo.BO;
 
+import java.time.LocalTime;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,4 +16,5 @@ public class TripSheetBO {
 	int employeeId;
 	String emlpoyeeName;
 	String dropPoint;
+	LocalTime reachedTime;
 }
