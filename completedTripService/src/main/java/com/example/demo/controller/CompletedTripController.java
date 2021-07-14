@@ -17,6 +17,7 @@ import com.example.demo.entitys.BookingRequest;
 import com.example.demo.entitys.Complaints;
 
 import com.example.demo.repositarys.BookingRequestRepositary;
+import com.example.demo.status.CustomStatus;
 
 @RestController
 @RequestMapping(path = "/api/v1")
@@ -53,15 +54,15 @@ public class CompletedTripController {
 
 		if (cmpDes == null) {
 			// send mail to User ---> Admin or HR
-		//	complBL.sendEmail();
+		//complBL.sendEmail();
 
 			updateComplaints.setComplaintDescription(complaintDes);
 			updatedCompl = repo.save(updateComplaints);
 
 		} else {
-			return new ResponseEntity<>(null, HttpStatus.ALREADY_REPORTED);// need to be change
+			return  ResponseEntity.status(CustomStatus.AlREADY_REGISTERED).body(null);// need to be change
 		}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(updatedCompl);
+		return ResponseEntity.status(HttpStatus.CREATED).body(updatedComplaints);
 	}
 }

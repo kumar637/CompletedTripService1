@@ -54,9 +54,9 @@ public class CompletedTripServiceApplication {
 				repo.save(user8);
 				repo.save(user9);
 				repo.save(user10);
-		//TripCabInfo trip2= new TripCabInfo(7, "TN10Ay8764", 1, "Alpha City", "Giundy", "AGS",
-			//		LocalDate.now(), LocalTime.now(), 7, 0, 7, "Reached", LocalTime.of(9, 0), LocalTime.of(10, 30));
-			//cabRepo.save(trip2);
+		TripCabInfo trip3= new TripCabInfo(1038, "TN10 AS 8055", 1, "Alpha City", "saidapet", "anna nagar",
+					LocalDate.now(), LocalTime.now(), 7, 0, 7, "Reached", LocalTime.of(9, 0), LocalTime.of(10, 30));
+			cabRepo.save(trip3);
 //				DriverInfo ramesh = new DriverInfo(1, "Ramesh", 987675675, "kuma@ere", "TNxxxxxxx", LocalDate.now());
 //				driverRepo.save(ramesh);
 //

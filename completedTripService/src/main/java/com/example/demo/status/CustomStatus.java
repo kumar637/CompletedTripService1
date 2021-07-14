@@ -6,6 +6,6 @@ public class CustomStatus {
 
 	public CustomStatus() {
 		super();
-		
+
 	}
 }

@@ -1,16 +1,17 @@
 // Completed Trip Js
 	
-	 var querystr = window.location.search;
-	alert(querystr);
-	 var id = querystr.split("=");
+	 var querystr = window.location.search; // search the details from the previous screen
+	 alert("Got the details!");
+	 
+	 var id = querystr.split("="); //split the details
 	 var tripId = id[1];	
 	 var bookId = id[2];
 	 var emplID = id[3];
+	 
 	window.onload = getCompletedTrip;
 	var xhr = new XMLHttpRequest();
 	function getCompletedTrip() {
-		xhr.open("GET", "http://localhost:4040/api/v1/completedTrip/" + tripId,
-			true);
+		xhr.open("GET", "http://localhost:4040/api/v1/completedTrip/" + tripId,true);
 		xhr.onreadystatechange = processResponse;
 		xhr.send(null);
 
@@ -21,17 +22,20 @@
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			completedTrip = JSON.parse(this.responseText);
 
+			// place the details from the database.
 			document.getElementById('cabNumber').innerText = completedTrip.cabNumber;
 			document.getElementById('driverName').innerText = completedTrip.driverName;
 			document.getElementById('driverContact').innerText = completedTrip.driverNumber;
 			document.getElementById('destination').innerText = completedTrip.destination;
-			var date = completedTrip.dateOfTravel;
+			
+			
+			var date = completedTrip.dateOfTravel;  // date format
 			var dateOfTravel = date.split("\-");
 			dateFormat = dateOfTravel[2] + "-" + dateOfTravel[1] + "-"+ dateOfTravel[0];
 			document.getElementById("date").innerHTML = dateFormat;
 			
-			// TimeSlot Format 
-			 var  timeSlotOption = document.getElementById('timeSlot');
+													// TimeSlot Format 
+			var  timeSlotOption = document.getElementById('timeSlot');
 			var slot = completedTrip.timeSlot;
 			var slotSplitted = slot.split(":");
 			slotHour = slotSplitted[0];
@@ -55,11 +59,10 @@
 				}
 			}
 			
-			
-			
-			var employeeReachedTime;
+			var employeeReachedTime;						
 			var length = completedTrip.tripList.length;
 			var tbody = document.getElementById("tableBody");
+			
 			for (i = 0; i < length; i++) {
 				var trow = document.createElement('tr');
 				trow.className = "row-bg-style";
@@ -85,13 +88,17 @@
 				trow.appendChild(td3);
 				tbody.appendChild(trow);
 				
+				// reached time for the login employee getByemployeeId.
+				
 				if(completedTrip.tripList[i].employeeId == emplID){
 					 employeeReachedTime = completedTrip.tripList[i].reachedTime;
 				}
 			}
+			
 			// no.of employees
 			document.getElementById("passenger").innerText = "No.Of Passengers : "+ length;
-			// Reached Time of the Login Employee.
+			
+														// Reached Time of the Login Employee.
 			var reachedTime = document.getElementById('reachedTime');
 			var slot1 = employeeReachedTime;
 			var slotSplitted1 = slot1.split(":");
@@ -120,16 +127,18 @@
 	}
 
 	
-	//////////////////// When User Clicks the Raise a Complaint////////////////////
+//------------------------------- When User Clicks the Raise a Complaint-------------------------------------//
 	
-	var raiseBtn = document.getElementById("raiseBtn");
-	raiseBtn.addEventListener("click", popUpDetails)
+		var raiseBtn = document.getElementById("raiseBtn");
+		raiseBtn.addEventListener("click", popUpDetails)
 		// popUp details
-	function popUpDetails() {
+		
+		function popUpDetails() {  // get the details from the front end for the popUp Screen.
 		document.getElementById("PopupDate").innerHTML = "Date: " + dateFormat;
-		 var timeSlotPop= document.getElementById("PopupTimeslot");
-		 var time =completedTrip.timeSlot;
-		 var slotSplitted2 = time.split(":");
+		
+		var timeSlotPop= document.getElementById("PopupTimeslot");
+		var time =completedTrip.timeSlot;
+		var slotSplitted2 = time.split(":");
 			slotHour = slotSplitted2[0];
 			if(slotHour < 12){
 				if(slotHour == 00 ){
@@ -157,28 +166,31 @@
 		document.getElementById("PopupDriverNo").innerHTML = "Driver Number: " + completedTrip.driverNumber;
 		document.getElementById("PopupDestination").innerHTML = "Destination: " + completedTrip.destination;
 
-		getDropdown();
+		getDropdown();  // get dropdown method triggered here !
 
 	}
 		// get Complaints in dropDown
-	var xhw = new XMLHttpRequest();
+		var xhrGetComplaints = new XMLHttpRequest();
 
-	function getDropdown() {
-		xhw.open("GET", "http://localhost:4040/api/v1/complaints", true);
-		xhw.onreadystatechange = getComplaints;
-		xhw.send(null);
-	}
+		function getDropdown() {
+		xhrGetComplaints.open("GET", "http://localhost:4040/api/v1/complaints", true);
+		xhrGetComplaints.onreadystatechange = getComplaints;
+		xhrGetComplaints.send(null);
+		}
 
-	function getComplaints() {
-		if (xhw.readyState == 4 && xhw.status == 200) {
+		function getComplaints() { 								// get the complaints from the DB.
+		if (xhrGetComplaints.readyState == 4 && xhrGetComplaints.status == 200) {
 			var complaintsList = JSON.parse(this.responseText);
 			var reasonSel = document.getElementById("dropdown");
 			var len = complaintsList.length;
-			// for avoid the repeatness in the dropdown
-			var optLength = reasonSel.options.length;
-			for (i = optLength - 1; i > 0; i--) {
+			
+			// for avoid the repeatness in the dropdown.
+			var optLength = reasonSel.options.length; // i=2;
+			for (i = optLength - 1; i > 0; i--) {// it will work in reverse that reduce the length=null;
 					reasonSel.options[i] = null;
 			}
+			
+			// create the dropdownlist
 			for (var i = 0; i < len; i++) {
 				var list = complaintsList[i];
 				var ele = document.createElement("option");
@@ -190,25 +202,26 @@
 
 	}
 
-///////////// Post Or Update the Complaint in The Database////////////////////
+//-----------------------------Update the Complaints in The Database-------------------------------//
+		
 		
 	var xhrComplaints = new XMLHttpRequest();
-	//var xhy = new XMLHttpRequest();
 	var popup = document.getElementById("raiseComPopUp");
-	//var bookingId = completedTrip.tripList.bookingId;
 	popup.onclick = validateComplaints;
-	function validateComplaints() {
-		var reasonSelec = document.getElementById("dropdown");
-		var value = reasonSelec.options[reasonSelec.selectedIndex].value;
+	
+	function validateComplaints() {  			// to validate the complaint 
+	var reasonSelec = document.getElementById("dropdown");
+	var value = reasonSelec.options[reasonSelec.selectedIndex].value; // get the selected index value,
+																		  //if its 0 then its Invalid.
 
 		if (value == 0) {
 			alert("Invalid Complaint");
 			return false;
 		}
-		Popraisebtn();
+		Popraisebtn(); // trigger the popRaise a complaint btn.
 	}
 
-	function Popraisebtn() {
+	function Popraisebtn() {   
 
 		var reasonSelec = document.getElementById("dropdown");
 		var value = reasonSelec.options[reasonSelec.selectedIndex].value;
@@ -217,20 +230,20 @@
 		
 		
 		function updateComplaint() {
-			if(xhrComplaints.readyState == 4 && xhrComplaints.status == 201){
+			if(xhrComplaints.readyState == 4 && xhrComplaints.status == 201){   
 				var obj = JSON.parse(xhrComplaints.responseText);
 				console.log(obj);
-				alert("Complaints registered Successfully!");
+				alert("Complaints registered Successfully!");   
 
 			}
-			if (xhrComplaints.readyState == 4 && xhrComplaints.status == 208) {
+			if (xhrComplaints.readyState == 4 && xhrComplaints.status == 501) {
 				alert("Complaints Already registerd !");
 
 
 			}
 		}
 
-		xhrComplaints.send();
+		xhrComplaints.send();  
 
 	}
 

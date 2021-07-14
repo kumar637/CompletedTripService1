@@ -13,7 +13,7 @@ spring:
   mail:
     host: smtp.outlook.com
     password: Mangalam@123
-    port: 25
+    port: 587
     properties:
       mail:
         smtp:
