@@ -1,7 +1,7 @@
 // Completed Trip Js
 	
 	 var querystr = window.location.search; // search the details from the previous screen
-	 alert("Got the details!");
+	 alert(querystr);
 	 
 	 var id = querystr.split("="); //split the details
 	 var tripId = id[1];	
@@ -11,7 +11,7 @@
 	window.onload = getCompletedTrip;
 	var xhr = new XMLHttpRequest();
 	function getCompletedTrip() {
-		xhr.open("GET", "http://localhost:4040/api/v1/completedTrip/" + tripId,true);
+		xhr.open("GET", "http://localhost:4041/api/v1/completedTrip/" + tripId,true);
 		xhr.onreadystatechange = processResponse;
 		xhr.send(null);
 
@@ -64,6 +64,7 @@
 			var tbody = document.getElementById("tableBody");
 			
 			for (i = 0; i < length; i++) {
+				$("#tablebody").empty();
 				var trow = document.createElement('tr');
 				trow.className = "row-bg-style";
 
@@ -102,24 +103,24 @@
 			var reachedTime = document.getElementById('reachedTime');
 			var slot1 = employeeReachedTime;
 			var slotSplitted1 = slot1.split(":");
-			slotHour = slotSplitted1[0];
-			if(slotHour < 12){
+			slotHour1= slotSplitted1[0];
+			if(slotHour1 < 12){
 				if(slotHour == 00 ){
 					reachedTime.innerText ="12" + ":" + slotSplitted1[1] +  " AM";
 				}else{
-					reachedTime.innerText =slotHour + ":" + slotSplitted1[1] +  " AM";
+					reachedTime.innerText =slotHour1 + ":" + slotSplitted1[1] +  " AM";
 				}
 				
 			}else{
-				slotHour = slotHour - 12 ;
+				slotHourreached = slotHour1 - 12 ;
 				if(slotHour < 10){
-					reachedTime.innerText = "0" + slotHour + ":" + slotSplitted1[1] + " PM";
+					reachedTime.innerText = "0" + slotHourreached + ":" + slotSplitted1[1] + " PM";
 					
 				}if(slotHour == 0 ){
 					reachedTime.innerText = "12"+ ":" + slotSplitted1[1] + " PM";
 				}
 				else{
-					reachedTime.innerText =   slotHour + ":" + slotSplitted1[1] +" PM";
+					reachedTime.innerText =   slotHoureached + ":" + slotSplitted1[1] +" PM";
 				}
 			}
 			
@@ -156,7 +157,7 @@
 					timeSlotPop.innerHTML = "Time Slot:  " + "12"+ ":" + slotSplitted2[1] + " PM";
 				}
 				else{
-					reachedTime.innerHTML = "Time Slot:  " +  slotHour + ":" + slotSplitted2[1] +" PM";
+					timeSlotPop.innerHTML = "Time Slot:  " +  slotHour + ":" + slotSplitted2[1] +" PM";
 				}
 			}
 			
@@ -173,7 +174,7 @@
 		var xhrGetComplaints = new XMLHttpRequest();
 
 		function getDropdown() {
-		xhrGetComplaints.open("GET", "http://localhost:4040/api/v1/complaints", true);
+		xhrGetComplaints.open("GET", "http://localhost:4041/api/v1/complaints", true);
 		xhrGetComplaints.onreadystatechange = getComplaints;
 		xhrGetComplaints.send(null);
 		}
@@ -225,7 +226,7 @@
 
 		var reasonSelec = document.getElementById("dropdown");
 		var value = reasonSelec.options[reasonSelec.selectedIndex].value;
-		xhrComplaints.open("PUT", "http://localhost:4040/api/v1/updateComplaints/" + bookId + "/" + value, true);
+		xhrComplaints.open("PUT", "http://localhost:4041/api/v1/updateComplaints/" + bookId + "/" + value, true);
 		xhrComplaints.onreadystatechange = updateComplaint;
 		
 		

@@ -45,18 +45,18 @@ public class CompletedTripServiceApplication {
 			@Override
 			public void run(String... args) throws Exception {
 
-				BookingRequest user8 = new BookingRequest(443, 4443, "parthiban", "Alpha City", "Tamabaram", "BTS",
-						LocalTime.now(), 6, LocalTime.of(9, 0), LocalTime.of(10, 0), "Reached", null);
-				BookingRequest user9 = new BookingRequest(988, 2234, "Ranbeer", "Alpha City", "velachery", "naruto",
-						LocalTime.now(), 6, LocalTime.of(10, 0), LocalTime.now(), "Reached", null);
-				BookingRequest user10 = new BookingRequest(776, 6453, "harish", "Alpha City", "Guindy", "valasaravakkam",
-						LocalTime.now(), 8, LocalTime.of(10, 0), LocalTime.of(12, 0), "Ongoing", null);
-				repo.save(user8);
-				repo.save(user9);
-				repo.save(user10);
-		TripCabInfo trip3= new TripCabInfo(1038, "TN10 AS 8055", 1, "Alpha City", "saidapet", "anna nagar",
-					LocalDate.now(), LocalTime.now(), 7, 0, 7, "Reached", LocalTime.of(9, 0), LocalTime.of(10, 30));
-			cabRepo.save(trip3);
+//				BookingRequest user8 = new BookingRequest(2, 2344, "Alagu", "Alpha City", "Tamabaram", "kelambakkam",
+//						LocalTime.now(), 1038, LocalTime.of(9, 0), LocalTime.of(10, 0), "Reached", null);
+//				BookingRequest user9 = new BookingRequest(988, 2234, "Ranbeer", "Alpha City", "velachery", "naruto",
+//						LocalTime.now(), 6, LocalTime.of(10, 0), LocalTime.now(), "Reached", null);
+//				BookingRequest user10 = new BookingRequest(776, 6453, "harish", "Alpha City", "Guindy", "valasaravakkam",
+//						LocalTime.now(), 8, LocalTime.of(10, 0), LocalTime.of(12, 0), "Ongoing", null);
+				//repo.save(user8);
+//				repo.save(user9);
+////				repo.save(user10);
+//		TripCabInfo trip4= new TripCabInfo(1038, "TN10DH2899", 1, "Alpha City", "saidapet", "anna nagar",
+//					LocalDate.now(), LocalTime.now(), 7, 0, 7, "Reached", LocalTime.of(9, 0), LocalTime.of(10, 30));
+			//cabRepo.save(trip4);
 //				DriverInfo ramesh = new DriverInfo(1, "Ramesh", 987675675, "kuma@ere", "TNxxxxxxx", LocalDate.now());
 //				driverRepo.save(ramesh);
 //
@@ -65,8 +65,6 @@ public class CompletedTripServiceApplication {
 //				comRepo.save(new Complaints("Cab is Not Clean"));
 //				comRepo.save(new Complaints("Using Mobile While Driving"));
 				
-				//service.sendEmail("jebakumar928@gmail", "you have notification", "Admin");
-
 			}
 	};
 	}

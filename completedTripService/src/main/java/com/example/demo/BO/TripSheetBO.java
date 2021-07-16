@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level=AccessLevel.PRIVATE)
 public class TripSheetBO {
-	int employeeId;
+	String employeeId;
 	String emlpoyeeName;
 	String dropPoint;
 	LocalTime reachedTime;

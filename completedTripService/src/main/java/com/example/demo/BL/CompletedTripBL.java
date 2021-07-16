@@ -30,8 +30,8 @@ public class CompletedTripBL {
 		return this.service.updateComplaints(bookingId, complaintDes);
 	}
 
-	public SimpleMailMessage sendEmail() {
-		return this.service.sendEmail();
+	public SimpleMailMessage sendEmail(long bookId,String complainDes) {
+		return this.service.sendEmail(bookId, complainDes);
 
 	}
 }

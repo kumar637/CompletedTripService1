@@ -1,11 +1,9 @@
 package com.example.demo.services;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,27 +34,31 @@ public class CompletedTripService {
 	@Autowired
 	JavaMailSender javaMailSender;
 
+	// To save the details
 	public BookingRequest save(BookingRequest request) {
 		return this.repo.save(request);
 	}
 
+	// CompletedTrip screen
+	List<BookingRequest> BookingDetails;
+
 	public CompletedTripBO getCompletedTrip(long tripCabId) {
 
-			// get the tripCabId and fetch the details in it.
+		// get the tripCabId and fetch the details in it.
 		TripCabInfo CompletedTrip = this.cabInfoRepo.findRequestByTripCabID(tripCabId);
 
-			// get the details of bookingRequestBO through tripCabId
+		// get the details of List of bookingRequestBO through tripCabId
 		List<BookingRequest> BookingDetails = this.repo.findByTripCabId(tripCabId);
-		
+
 		long driverID = CompletedTrip.getDriverID();
 
-			// get the driver details through driverId
+		// get the driver details through driverId
 		DriverInfo info = this.driverInfoRepo.findByDriverId(driverID);
 
-		CompletedTripBO cmptBo = new CompletedTripBO();
-		List<TripSheetBO> tpList = new ArrayList<>();
+		CompletedTripBO cmptBo = new CompletedTripBO(); // completedTrip Obj.
+		List<TripSheetBO> tpList = new ArrayList<>(); // Array for each employee.
 
-			// set the required details to BO through the tripCabId and DriverId
+		// set the required details to BO through the tripCabId and DriverId
 		cmptBo.setDestination(CompletedTrip.getDestination());
 		cmptBo.setDateOfTravel(CompletedTrip.getDateOfTravel());
 		cmptBo.setTimeSlot(CompletedTrip.getTimeSlot());
@@ -65,14 +67,13 @@ public class CompletedTripService {
 		cmptBo.setSource(CompletedTrip.getSource());
 		cmptBo.setCabNumber(CompletedTrip.getCabNumber());
 
-			// for each employee
+		// for each employee
 		for (BookingRequest eachRequest : BookingDetails) {
 			tpList.add(new TripSheetBO(eachRequest.getEmployeeId(), eachRequest.getEmlpoyeeName(),
-					eachRequest.getDropPoint(),eachRequest.getReachedTime()));
+					eachRequest.getDropPoint(), eachRequest.getReachedTime()));
 		}
 
 		cmptBo.setTripList(tpList);
-		
 
 		return cmptBo;
 
@@ -85,14 +86,26 @@ public class CompletedTripService {
 	public BookingRequest updateComplaints(long bookingId, String complaintDescription) {
 		return this.repo.findByBookingId(bookingId);// update the complaint description in BookingRequestBO
 	}
+
 	// Sent Email Service
-	public SimpleMailMessage sendEmail() {
+	public SimpleMailMessage sendEmail(long bookId, String complDes) {
+		// need to get the Email format
 		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setFrom("kumar.v@avasoft.com");
-		mail.setTo("kumar.v@avasoft.com");
+
+		BookingRequest detailsEmp = repo.findByBookingId(bookId);
+		long tripId = detailsEmp.getTripCabId();
+		TripCabInfo info = cabInfoRepo.findById(tripId).get();
+		long driverId = info.getDriverID();
+		DriverInfo info1 = driverInfoRepo.findByDriverId(driverId);
+
+		mail.setFrom("kumar928jeba@hotmail.com");
+		mail.setTo("kumarstunner928@outlook.com", "kumarjeba928@outlook.com");
 		// mail.setTo("rohit.krish@hotmail.com");
-		mail.setSubject("User");
-		mail.setText("Hi there ");
+
+		// as of now we encounterd this info.
+		mail.setSubject("Compalints Registered By the Employee: " + detailsEmp.getEmlpoyeeName());
+		mail.setText("Complaint Description: " + complDes + "Of cab Number: " + info.getCabNumber() + "On"
+				+ info.getDateOfTravel() + "Driver Name: " + info1.getDriverName());
 
 		javaMailSender.send(mail);
 		return mail;

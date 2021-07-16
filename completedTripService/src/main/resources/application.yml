@@ -1,5 +1,5 @@
 server:
-  port: 4040
+  port: 4041
   
   
 spring:
@@ -12,16 +12,14 @@ spring:
       
   mail:
     host: smtp.outlook.com
-    password: Mangalam@123
+    password: jebakumar28031999
     port: 587
     properties:
       mail:
         smtp:
-          
           auth: true
           starttls:
             enable: true
-        store:  
           protocol: smtp
-    username: kumar.v@avasoft.com
+    username: kumar928jeba@hotmail.com
       
