@@ -61,8 +61,8 @@ public class CompletedTripController {
 		if (cmpDes == null) {
 			
 			// send mail to User ---> Admin or HR
-				complBL.sendEmail(bookingId, complaintDes);
-				System.out.println("hello");
+			//complBL.sendEmail(bookingId, complaintDes); // this line is responsible for the mail Uncomment the line to send the mail function.
+			//System.out.println("hello");
 			updateComplaints.setComplaintDescription(complaintDes);
 			updatedCompl = repo.save(updateComplaints);
 

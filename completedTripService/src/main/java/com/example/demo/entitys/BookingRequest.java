@@ -1,5 +1,7 @@
 package com.example.demo.entitys;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.springframework.data.annotation.Id;
@@ -15,21 +17,29 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Document(collection = "bookingRequest")
+@Document(collection = "BookingRequest")
 
 public class BookingRequest {
 	
 	@Id
 	long bookingId;
 	String employeeId;
-	String emlpoyeeName;
-	String  source;
+	String employeeName;
+	String source;
 	String destination;
 	String dropPoint;
+	LocalDateTime bookingTime;
 	LocalTime timeSlot;
-	int tripCabId;
+	int addedManually;
+	long tripCabId;
 	LocalTime startTime;
 	LocalTime reachedTime;
-	String status;
 	String complaintDescription;
+	String remarks;
+	String status;
+	String createdBy;
+	LocalDate createdDate;
+	String modifiedBy;
+	LocalDate modifiedDate;
+	int isDeleted;
 }

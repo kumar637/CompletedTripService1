@@ -15,6 +15,7 @@ import lombok.experimental.FieldDefaults;
 public class TripSheetBO {
 	String employeeId;
 	String emlpoyeeName;
+	//String employeeEmail;
 	String dropPoint;
 	LocalTime reachedTime;
 }

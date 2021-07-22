@@ -37,27 +37,8 @@
 													// TimeSlot Format 
 			var  timeSlotOption = document.getElementById('timeSlot');
 			var slot = completedTrip.timeSlot;
-			var slotSplitted = slot.split(":");
-			slotHour = slotSplitted[0];
-			if(slotHour < 12){
-				if(slotHour == 00 ){
-					timeSlotOption.innerHTML ="12" + ":" + slotSplitted[1] +  " AM";
-				}else{
-					timeSlotOption.innerHTML =slotHour + ":" + slotSplitted[1] +  " AM";
-				}
-				
-			}else{
-				slotHour = slotHour - 12 ;
-				if(slotHour < 10){
-					timeSlotOption.innerHTML = "0" + slotHour + ":" + slotSplitted[1] + " PM";
-					
-				}if(slotHour == 0 ){
-					timeSlotOption.innerHTML = "12"+ ":" + slotSplitted[1] + " PM";
-				}
-				else{
-					timeSlotOption.innerHTML =   slotHour + ":" + slotSplitted[1] +" PM";
-				}
-			}
+			timeSlotOption.innerHTML = timeFormatTo12Hr(slot,0)
+
 			
 			var employeeReachedTime;						
 			var length = completedTrip.tripList.length;
@@ -89,7 +70,7 @@
 				trow.appendChild(td3);
 				tbody.appendChild(trow);
 				
-				// reached time for the login employee getByemployeeId.
+				// To get reached time for the login employee 
 				
 				if(completedTrip.tripList[i].employeeId == emplID){
 					 employeeReachedTime = completedTrip.tripList[i].reachedTime;
@@ -101,30 +82,11 @@
 			
 														// Reached Time of the Login Employee.
 			var reachedTime = document.getElementById('reachedTime');
-			var slot1 = employeeReachedTime;
-			var slotSplitted1 = slot1.split(":");
-			slotHour1= slotSplitted1[0];
-			if(slotHour1 < 12){
-				if(slotHour == 00 ){
-					reachedTime.innerText ="12" + ":" + slotSplitted1[1] +  " AM";
-				}else{
-					reachedTime.innerText =slotHour1 + ":" + slotSplitted1[1] +  " AM";
-				}
-				
-			}else{
-				slotHourreached = slotHour1 - 12 ;
-				if(slotHour < 10){
-					reachedTime.innerText = "0" + slotHourreached + ":" + slotSplitted1[1] + " PM";
-					
-				}if(slotHour == 0 ){
-					reachedTime.innerText = "12"+ ":" + slotSplitted1[1] + " PM";
-				}
-				else{
-					reachedTime.innerText =   slotHoureached + ":" + slotSplitted1[1] +" PM";
-				}
-			}
 			
-		}
+			var slot1 = employeeReachedTime;
+			reachedTime.innerText = timeFormatTo12Hr(slot1,0);
+			
+	}
 	}
 
 	
@@ -139,30 +101,11 @@
 		
 		var timeSlotPop= document.getElementById("PopupTimeslot");
 		var time =completedTrip.timeSlot;
-		var slotSplitted2 = time.split(":");
-			slotHour = slotSplitted2[0];
-			if(slotHour < 12){
-				if(slotHour == 00 ){
-					timeSlotPop.innerHTML =  "Time Slot:  " +"12" + ":" + slotSplitted2[1] +  " AM";
-				}else{
-					timeSlotPop.innerHTML = "Time Slot:  " +slotHour + ":" + slotSplitted2[1] +  " AM";
-				}
-				
-			}else{
-				slotHour = slotHour - 12 ;
-				if(slotHour < 10){
-					timeSlotPop.innerHTML = "Time Slot:  " + "0" + slotHour + ":" + slotSplitted2[1] + " PM";
-					
-				}if(slotHour == 0 ){
-					timeSlotPop.innerHTML = "Time Slot:  " + "12"+ ":" + slotSplitted2[1] + " PM";
-				}
-				else{
-					timeSlotPop.innerHTML = "Time Slot:  " +  slotHour + ":" + slotSplitted2[1] +" PM";
-				}
-			}
-			
 		
-		document.getElementById("PopupCabNo.").innerHTML = "Cab Number: " + completedTrip.cabNumber;
+		timeSlotPop.innerHTML = "Time Slot: "+timeFormatTo12Hr(time,0); // call the timeformatter Js
+		
+
+			document.getElementById("PopupCabNo.").innerHTML = "Cab Number: " + completedTrip.cabNumber;
 		document.getElementById("PopDriverName").innerHTML = "Driver Name: " + completedTrip.driverName;
 		document.getElementById("PopupDriverNo").innerHTML = "Driver Number: " + completedTrip.driverNumber;
 		document.getElementById("PopupDestination").innerHTML = "Destination: " + completedTrip.destination;
@@ -245,6 +188,8 @@
 		}
 
 		xhrComplaints.send();  
+		
+		
 
 	}
 

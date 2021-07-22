@@ -69,10 +69,10 @@ public class CompletedTripService {
 
 		// for each employee
 		for (BookingRequest eachRequest : BookingDetails) {
-			tpList.add(new TripSheetBO(eachRequest.getEmployeeId(), eachRequest.getEmlpoyeeName(),
-					eachRequest.getDropPoint(), eachRequest.getReachedTime()));
+			tpList.add(new TripSheetBO(eachRequest.getEmployeeId(), eachRequest.getEmployeeName(), eachRequest.getDropPoint(), eachRequest.getReachedTime()));
 		}
 
+		
 		cmptBo.setTripList(tpList);
 
 		return cmptBo;
@@ -98,12 +98,15 @@ public class CompletedTripService {
 		long driverId = info.getDriverID();
 		DriverInfo info1 = driverInfoRepo.findByDriverId(driverId);
 
-		mail.setFrom("kumar928jeba@hotmail.com");
+	//	mail.setFrom(detailsEmp.getEmployeeEmail());
+		
+		//System.out.println(detailsEmp.getEmployeeEmail());
+		
 		mail.setTo("kumarstunner928@outlook.com", "kumarjeba928@outlook.com");
 		// mail.setTo("rohit.krish@hotmail.com");
 
 		// as of now we encounterd this info.
-		mail.setSubject("Compalints Registered By the Employee: " + detailsEmp.getEmlpoyeeName());
+		mail.setSubject("Compalints Registered By the Employee: " + detailsEmp.getEmployeeName());
 		mail.setText("Complaint Description: " + complDes + "Of cab Number: " + info.getCabNumber() + "On"
 				+ info.getDateOfTravel() + "Driver Name: " + info1.getDriverName());
 
