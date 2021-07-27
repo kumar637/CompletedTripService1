@@ -12,7 +12,7 @@ spring:
       
   mail:
     host: smtp.outlook.com
-    password: jebakumar28031999
+    password: kumar28031999
     port: 587
     properties:
       mail:
@@ -21,5 +21,5 @@ spring:
           starttls:
             enable: true
           protocol: smtp
-    username: kumar928jeba@hotmail.com
+    username: harishkanna987@outlook.com
       

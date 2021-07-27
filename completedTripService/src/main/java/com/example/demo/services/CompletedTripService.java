@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,10 +15,12 @@ import com.example.demo.BO.TripSheetBO;
 import com.example.demo.entitys.BookingRequest;
 import com.example.demo.entitys.Complaints;
 import com.example.demo.entitys.DriverInfo;
+import com.example.demo.entitys.EmployeeInfo;
 import com.example.demo.entitys.TripCabInfo;
 import com.example.demo.repositarys.BookingRequestRepositary;
 import com.example.demo.repositarys.ComplaintsRepositary;
 import com.example.demo.repositarys.DriverInfoRepositary;
+import com.example.demo.repositarys.EmployeeRepository;
 import com.example.demo.repositarys.TripCabInfoRepositary;
 
 @Service(value = "completedTrip")
@@ -33,6 +36,8 @@ public class CompletedTripService {
 	ComplaintsRepositary repositary;
 	@Autowired
 	JavaMailSender javaMailSender;
+	@Autowired
+	EmployeeRepository empRepo;
 
 	// To save the details
 	public BookingRequest save(BookingRequest request) {
@@ -97,12 +102,14 @@ public class CompletedTripService {
 		TripCabInfo info = cabInfoRepo.findById(tripId).get();
 		long driverId = info.getDriverID();
 		DriverInfo info1 = driverInfoRepo.findByDriverId(driverId);
+		EmployeeInfo empInfo = empRepo.findById(detailsEmp.getEmployeeId()).get();
 
-	//	mail.setFrom(detailsEmp.getEmployeeEmail());
+		String mail1 = empInfo.getEmployeeMail(); // usage the employeemail  from the DB.
+		mail.setFrom(mail1);
 		
-		//System.out.println(detailsEmp.getEmployeeEmail());
+		//System.out.println();
 		
-		mail.setTo("kumarstunner928@outlook.com", "kumarjeba928@outlook.com");
+		mail.setTo( "kumarstunner@outlook.com");
 		// mail.setTo("rohit.krish@hotmail.com");
 
 		// as of now we encounterd this info.
